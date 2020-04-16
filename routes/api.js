@@ -55,27 +55,42 @@ router.get('/movie',(req,res)=>{
 
 //Create game
 router.post('/game',(req,res)=>{
-    res.send(`Created game`);
+    // res.send(`Created game`);
+    GameCollection.create(req.body,(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Read game by title
 router.get('/game/:title',(req,res)=>{
-    res.send(`Read game by title`);
+    // res.send(`Read game by title`);
+    GameCollection.findOne({gameTitle:req.params.title},(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Update game by title
 router.put('/game/:title',(req,res)=>{
-    res.send(`Updated game`);
+    // res.send(`Updated game`);
+    GameCollection.findOneAndUpdate({gameTitle:req.params.title}, req.body, (errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Delete game by title
 router.delete('/game/:title',(req,res)=>{
-    res.send(`Deleted game`);
+    // res.send(`Deleted game`);
+    GameCollection.findOneAndDelete({gameTitle:req.params.title},(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Read all games
 router.get('/game',(req,res)=>{
-    res.send(`Got all games`);
+    // res.send(`Got all games`);
+    GameCollection.find({},(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //export route
