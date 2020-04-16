@@ -3,8 +3,7 @@ let express = require('express');
 let app = express();
 let portNumber=2112;
 
-//json middleware
-app.use(express.json());
+
 
 //import and mount route
 let api = require('./routes/api');

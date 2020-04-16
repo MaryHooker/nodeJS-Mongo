@@ -1,6 +1,8 @@
 //create route
 let express = require('express');
 let router = express.Router();
+//json middleware
+router.use(express.json());
 
 //import models
 let MovieCollection = require('../models/MovieSchema');
