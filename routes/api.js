@@ -2,6 +2,10 @@
 let express = require('express');
 let router = express.Router();
 
+//import models
+let MovieCollection = require('../models/MovieSchema');
+let GameCollection = require('../models/GameSchema');
+
 // //sanity
 // router.get('/test',(req,res)=>{
 //     res.send(`Loud and Clear`);
@@ -9,27 +13,42 @@ let router = express.Router();
 
 //Create movie
 router.post('/movie',(req,res)=>{
-    res.send(`Created movie`);
+    // res.send(`Created movie`);
+    MovieCollection.create(req.body,(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Read movie by title
 router.get('/movie/:title',(req,res)=>{
-    res.send(`Read movie by title`);
+    // res.send(`Read movie by title`);
+    MovieCollection.findOne({movieTitle:req.params.title},(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Update movie by title
 router.put('/movie/:title',(req,res)=>{
-    res.send(`Updated movie`);
+    // res.send(`Updated movie`);
+    MovieCollection.findOneAndUpdate({movieTitle:req.params.title}, req.body,(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Delete movie by title
 router.delete('/movie/:title',(req,res)=>{
-    res.send(`Deleted movie`);
+    // res.send(`Deleted movie`);
+    MovieCollection.findOneAndDelete({movieTitle:req.params.title},(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //Read all movies
 router.get('/movie',(req,res)=>{
-    res.send(`Got all movies`);
+    // res.send(`Got all movies`);
+    MovieCollection.find({},(errors,results)=>{
+        errors ? res.send(errors) : res.send(results);
+    })
 })
 
 //////////////////////////////////////////////////////
